@@ -1,5 +1,3 @@
-# .gitignore for Python projects (covers all subfolders)
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
