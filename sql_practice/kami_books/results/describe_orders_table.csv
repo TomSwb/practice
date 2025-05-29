@@ -1,0 +1,7 @@
+"Field","Type","Null","Key","Default","Extra"
+"id","int","NO","PRI","","auto_increment"
+"client_id","int","NO","MUL","",""
+"book_id","int","NO","MUL","",""
+"quantity","int","NO","","",""
+"total","decimal(10,2)","NO","","",""
+"order_date","timestamp","YES","","CURRENT_TIMESTAMP","DEFAULT_GENERATED"
