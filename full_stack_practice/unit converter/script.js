@@ -655,7 +655,7 @@ function autoConvert() {
     }
     
     if (fromUnit === toUnit) {
-        resultElement.textContent = formatNumber(inputValue);
+        resultElement.textContent = formatNumber(inputValue, fromUnit, toUnit, currentCategory);
         showHint("💡 Converting to the same unit");
         return;
     }
@@ -663,7 +663,7 @@ function autoConvert() {
     const result = convertUnits(inputValue, fromUnit, toUnit, currentCategory);
     
     if (result !== null && isFinite(result)) {
-        resultElement.textContent = formatNumber(result);
+        resultElement.textContent = formatNumber(result, fromUnit, toUnit, currentCategory);
         
         // Show helpful hints
         const absResult = Math.abs(result);
