@@ -46,7 +46,7 @@ body {
     right: 0;
     bottom: 0;
     background: linear-gradient(45deg, 
-        rgba(255, 255, 255, 0.1) 0%, 
+        rgba(197, 22, 22, 0.1) 0%, 
         transparent 50%, 
         rgba(255, 255, 255, 0.05) 100%);
 }
@@ -76,8 +76,8 @@ body {
 /* Navigation */
 .nav-tabs {
     display: flex;
-    background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
-    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+    background: linear-gradient(180deg, #1770c9 0%, #83b8ec 100%);
+    border-bottom: 1px solid rgba(14, 105, 224, 0.8);
     padding: 0;
     margin: 0;
     overflow-x: auto;
@@ -97,7 +97,7 @@ body {
     cursor: pointer;
     font-size: 15px;
     font-weight: 600;
-    color: #64748b;
+    color: rgba(255, 255, 255, 0.9);
     border-bottom: 3px solid transparent;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     min-width: 120px;
@@ -112,27 +112,36 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(180deg, transparent 0%, rgba(99, 102, 241, 0.05) 100%);
+    background: transparent;
     opacity: 0;
     transition: opacity 0.3s ease;
 }
 
 .nav-tab:hover::before {
-    opacity: 1;
+    opacity: 0;
 }
 
 .nav-tab:hover {
-    color: #475569;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.8) 0%, rgba(248, 250, 252, 0.9) 100%);
+    color: rgba(255, 255, 255, 0.95);
+    background: linear-gradient(180deg, 
+        rgba(34, 197, 94, 0.8) 0%, 
+        rgba(21, 128, 61, 0.9) 100%);
+    border-bottom-color: rgba(34, 197, 94, 0.7);
+    box-shadow: 
+        0 2px 8px rgba(34, 197, 94, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .nav-tab.active {
-    color: #6366f1;
-    border-bottom-color: #6366f1;
-    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    color: rgba(255, 255, 255, 0.95);
+    border-bottom-color: #16a34a;
+    background: linear-gradient(180deg, 
+        #15803d 0%, 
+        #166534 100%);
     box-shadow: 
-        0 -2px 8px rgba(99, 102, 241, 0.1),
-        inset 0 3px 0 rgba(255, 255, 255, 0.8);
+        0 -2px 8px rgba(22, 163, 74, 0.3),
+        0 2px 8px rgba(22, 163, 74, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 
