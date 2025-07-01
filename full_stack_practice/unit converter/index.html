@@ -155,16 +155,29 @@
                         <div class="empty-state-subtext">Use the ⭐ button on conversions to add them here.</div>
                     </div>
                 </div>
+                
+                <!-- Clear All Favorites Button - Centered at bottom -->
+                <div class="favorites-controls" style="margin-top: 20px; text-align: center; display: none;">
+                    <button onclick="showClearFavoritesConfirmation()" class="btn-small btn-remove">Clear All Favorites</button>
+                </div>
+                
+                <!-- Clear All Favorites Confirmation Dialog -->
+                <div id="clearFavoritesDialog" class="confirmation-dialog" style="display: none;">
+                    <div class="confirmation-content">
+                        <div class="confirmation-icon">⚠️</div>
+                        <div class="confirmation-title">Clear All Favorites?</div>
+                        <div class="confirmation-message">This will permanently delete all your favorite conversions. This action cannot be undone.</div>
+                        <div class="confirmation-buttons">
+                            <button onclick="confirmClearFavorites()" class="btn-small btn-remove">Yes, Clear All</button>
+                            <button onclick="hideClearFavoritesConfirmation()" class="btn-small btn-use" style="margin-left: 10px;">Cancel</button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Recent Page -->
             <div id="recentPage" class="page">
                 <h2><span class="emoji">🕒</span> <span class="text">Recent</span></h2>
-                <div class="recent-controls" style="margin-bottom: 20px;">
-                    <button onclick="showClearConfirmation()" class="btn-small btn-remove">Clear History</button>
-                    <!-- <button onclick="window.testAddRecentHistory ? window.testAddRecentHistory() : alert('Function not found!')" class="btn-small" style="margin-left: 10px;">Add Test Data</button>
-                    <button onclick="alert('Simple test works!')" class="btn-small" style="margin-left: 10px;">Simple Test</button> -->
-                </div>
                 
                 <!-- Custom Confirmation Dialog -->
                 <div id="clearConfirmationDialog" class="confirmation-dialog" style="display: none;">
@@ -178,12 +191,18 @@
                         </div>
                     </div>
                 </div>
+                
                 <div id="recentList" class="list-container">
                     <div class="empty-state">
                         <div class="empty-state-icon">🕒</div>
                         <div class="empty-state-text">No recent conversions yet!</div>
                         <div class="empty-state-subtext">Start converting to see your history here.</div>
                     </div>
+                </div>
+                
+                <!-- Clear History Button - Moved to bottom and centered -->
+                <div class="recent-controls" style="margin-top: 20px; text-align: center; display: none;">
+                    <button onclick="showClearConfirmation()" class="btn-small btn-remove">Clear History</button>
                 </div>
             </div>
 
@@ -196,6 +215,24 @@
                     
                     <h3 class="popular-subsection">Most Used Conversions</h3>
                     <div id="popularConversions" class="list-container"></div>
+                </div>
+                
+                <!-- Clear All Popular Button - Centered at bottom -->
+                <div class="popular-controls" style="margin-top: 20px; text-align: center; display: none;">
+                    <button onclick="showClearPopularConfirmation()" class="btn-small btn-remove">Clear All Popular Data</button>
+                </div>
+                
+                <!-- Clear All Popular Confirmation Dialog -->
+                <div id="clearPopularDialog" class="confirmation-dialog" style="display: none;">
+                    <div class="confirmation-content">
+                        <div class="confirmation-icon">⚠️</div>
+                        <div class="confirmation-title">Clear All Popular Data?</div>
+                        <div class="confirmation-message">This will permanently delete all your usage statistics and popular conversions data. This action cannot be undone.</div>
+                        <div class="confirmation-buttons">
+                            <button onclick="confirmClearPopular()" class="btn-small btn-remove">Yes, Clear All</button>
+                            <button onclick="hideClearPopularConfirmation()" class="btn-small btn-use" style="margin-left: 10px;">Cancel</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
