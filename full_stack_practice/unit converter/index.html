@@ -10,150 +10,159 @@
 </head>
 
 <body>
-    <div class="container">
-        <h1>Unit Converter</h1>
+    <div class="app">
+        <!-- Header -->
+        <div class="header">
+            <h1>Unit Converter</h1>
+            <div class="subtitle">Professional conversion tool for all your measurement needs</div>
+        </div>
         
-        <!-- Navigation Header -->
-        <div class="nav-header">
-            <div class="nav-tabs">
-                <button class="nav-tab active" onclick="showPage('converter')">🔄 Convert</button>
-                <button class="nav-tab" onclick="showPage('favorites')">⭐ Favorites</button>
-                <button class="nav-tab" onclick="showPage('recent')">🕒 Recent</button>
-                <button class="nav-tab" onclick="showPage('popular')">🔥 Popular</button>
+        <!-- Navigation -->
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showPage('converter')">🔄 Convert</button>
+            <button class="nav-tab" onclick="showPage('favorites')">⭐ Favorites</button>
+            <button class="nav-tab" onclick="showPage('recent')">🕒 Recent</button>
+            <button class="nav-tab" onclick="showPage('popular')">🔥 Popular</button>
+        </div>
+        
+        <!-- Quick Search -->
+        <div class="quick-search">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search units, categories, or sectors..." oninput="performSearch()">
+                <span class="search-icon">🔍</span>
             </div>
+            <div id="searchResults" class="search-results" style="display: none;"></div>
         </div>
 
-        <!-- Main Converter Page -->
-        <div id="converterPage" class="page active">
-            <div class="converter-section">
-                
-                <!-- Search Section -->
-                <div class="search-section">
-                    <label for="searchInput">Quick Search:</label>
-                    <input type="text" id="searchInput" placeholder="Search units, categories, or sectors..." oninput="performSearch()">
-                    <div id="searchResults" class="search-results" style="display: none;"></div>
-                </div>
-
-                <!-- Progressive Disclosure Toggle -->
-                <div class="complexity-toggle">
-                    <label>Mode:</label>
-                    <select id="complexityLevel" onchange="updateComplexityLevel()">
-                        <option value="basic">📱 Basic (Everyday)</option>
-                        <option value="professional">💼 Professional</option>
-                        <option value="expert">🔬 Expert (All Units)</option>
-                    </select>
-                </div>
-
-                <!-- Sector Filter -->
-                <div class="sector-section">
-                    <label for="sector">Sector:</label>
-                    <select id="sector" onchange="updateCategoriesBySector()">
-                        <option value="all">🌐 All Sectors</option>
-                        <option value="everyday">🏠 Everyday & General</option>
-                        <option value="engineering">🔧 Engineering & Construction</option>
-                        <option value="science">🔬 Science & Research</option>
-                        <option value="automotive">🚗 Automotive & Transportation</option>
-                        <option value="culinary">👨‍🍳 Culinary & Food Service</option>
-                        <option value="digital">💻 Digital & Technology</option>
-                        <option value="health">🏥 Health & Fitness</option>
-                        <option value="aviation">✈️ Aviation & Maritime</option>
-                        <option value="business">💰 Business & Finance</option>
-                    </select>
+        <!-- Page Content -->
+        <div class="page-content">
+            <!-- Main Converter Page -->
+            <div id="converterPage" class="page active">
+                <!-- Filters Section -->
+                <div class="filters">
+                    <div class="filter-group">
+                        <label>Mode:</label>
+                        <select id="complexityLevel" onchange="updateComplexityLevel()">
+                            <option value="basic">📱 Basic (Everyday)</option>
+                            <option value="professional">💼 Professional</option>
+                            <option value="expert">🔬 Expert (All Units)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="sector">Sector:</label>
+                        <select id="sector" onchange="updateCategoriesBySector()">
+                            <option value="all">🌐 All Sectors</option>
+                            <option value="everyday">🏠 Everyday & General</option>
+                            <option value="engineering">🔧 Engineering & Construction</option>
+                            <option value="science">🔬 Science & Research</option>
+                            <option value="automotive">🚗 Automotive & Transportation</option>
+                            <option value="culinary">👨‍🍳 Culinary & Food Service</option>
+                            <option value="digital">💻 Digital & Technology</option>
+                            <option value="health">🏥 Health & Fitness</option>
+                            <option value="aviation">✈️ Aviation & Maritime</option>
+                            <option value="business">💰 Business & Finance</option>
+                        </select>
+                    </div>
                 </div>
 
                 <!-- Category Section -->
-                <div class="category-section">
-                    <label for="category">Category:</label>
+                <div class="converter-section category-section">
+                    <label class="section-label" for="category">Category:</label>
                     <select id="category" onchange="updateUnitSelectors()">
                         <!-- Populated dynamically based on sector and complexity -->
                     </select>
                 </div>
             
-            <div class="subcategory-section" id="subcategorySection" style="display: none;">
-                <label for="subcategory">Subcategory:</label>
-                <select id="subcategory" onchange="updateUnitSelectors()">
-                    <!-- Populated dynamically -->
-                </select>
-            </div>
+                <div class="converter-section subcategory-section" id="subcategorySection" style="display: none;">
+                    <label class="section-label" for="subcategory">Subcategory:</label>
+                    <select id="subcategory" onchange="updateUnitSelectors()">
+                        <!-- Populated dynamically -->
+                    </select>
+                </div>
             
-            <div class="unit-selector-section">
-                <div class="from-unit-section">
-                    <label for="fromUnit">From:</label>
-                    <select id="fromUnit" onchange="autoConvert()">
-                        <!-- Populated dynamically -->
-                    </select>
+                <div class="converter-section unit-selector-section">
+                    <div class="from-unit-section">
+                        <label class="section-label" for="fromUnit">From:</label>
+                        <select id="fromUnit" onchange="autoConvert()">
+                            <!-- Populated dynamically -->
+                        </select>
+                    </div>
+                    
+                    <div class="swap-section">
+                        <button id="swapButton" onclick="swapUnits()" title="Swap conversion direction">⇄</button>
+                    </div>
+                    
+                    <div class="to-unit-section">
+                        <label class="section-label" for="toUnit">To:</label>
+                        <select id="toUnit" onchange="autoConvert()">
+                            <!-- Populated dynamically -->
+                        </select>
+                    </div>
                 </div>
-                
-                <div class="swap-section">
-                    <button id="swapButton" onclick="swapUnits()" title="Swap conversion direction">⇄</button>
+
+                <!-- Input and Result Section -->
+                <div class="converter-section input-section">
+                    <label class="section-label" for="userInput">Enter value:</label>
+                    <input type="number" id="userInput" placeholder="Enter a number" oninput="autoConvert()" step="any">
+                    <span id="inputUnit" class="unit-label"></span>
+                    
+                    <!-- Add to Favorites Button -->
+                    <div id="favoriteButton" class="favorite-button" style="display: none; margin-top: 12px;">
+                        <button onclick="toggleFavorite()" id="favBtn" title="Add to favorites" class="btn-small btn-use">⭐ Add to Favorites</button>
+                    </div>
                 </div>
-                
-                <div class="to-unit-section">
-                    <label for="toUnit">To:</label>
-                    <select id="toUnit" onchange="autoConvert()">
-                        <!-- Populated dynamically -->
-                    </select>
+
+                <div class="converter-section result-section">
+                    <label class="section-label">Result:</label>
+                    <div id="resultElement" class="result-display">0</div>
+                    <span id="outputUnit" class="unit-label"></span>
                 </div>
-            </div>
-        </div>
 
-        <!-- Input and Result Section -->
-        <div class="input-section">
-            <label for="userInput">Enter value:</label>
-            <input type="number" id="userInput" placeholder="Enter a number" oninput="autoConvert()" step="any">
-            <span id="inputUnit" class="unit-label"></span>
-        </div>
-
-        <div class="result-section">
-            <label>Result:</label>
-            <div id="resultElement" class="result-display">0</div>
-            <span id="outputUnit" class="unit-label"></span>
-        </div>
-
-        <div class="error-section">
-            <div id="errorMessage" class="error-message"></div>
-            <div id="hintMessage" class="hint-message"></div>
-        </div>
-        </div>
-
-        <!-- Favorites Page -->
-        <div id="favoritesPage" class="page">
-            <h2>⭐ Favorite Conversions</h2>
-            <div id="favoritesList" class="favorites-list">
-                <div class="empty-state">
-                    <p>No favorites yet! Use the ⭐ button on conversions to add them here.</p>
+                <div class="error-section">
+                    <div id="errorMessage" class="error-message"></div>
+                    <div id="hintMessage" class="hint-message"></div>
                 </div>
             </div>
-        </div>
 
-        <!-- Recent Page -->
-        <div id="recentPage" class="page">
-            <h2>🕒 Recent Conversions</h2>
-            <div class="recent-controls">
-                <button onclick="clearRecentHistory()" class="clear-button">Clear History</button>
-            </div>
-            <div id="recentList" class="recent-list">
-                <div class="empty-state">
-                    <p>No recent conversions yet!</p>
+            <!-- Favorites Page -->
+            <div id="favoritesPage" class="page">
+                <h2>⭐ Favorite Conversions</h2>
+                <div id="favoritesList" class="list-container">
+                    <div class="empty-state">
+                        <div class="empty-state-icon">⭐</div>
+                        <div class="empty-state-text">No favorites yet!</div>
+                        <div class="empty-state-subtext">Use the ⭐ button on conversions to add them here.</div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Popular Page -->
-        <div id="popularPage" class="page">
-            <h2>🔥 Popular Conversions</h2>
-            <div class="popular-categories">
-                <h3>Most Used Categories</h3>
-                <div id="popularCategories" class="popular-stats"></div>
-                
-                <h3>Most Used Conversions</h3>
-                <div id="popularConversions" class="popular-stats"></div>
+            <!-- Recent Page -->
+            <div id="recentPage" class="page">
+                <h2>🕒 Recent Conversions</h2>
+                <div class="recent-controls" style="margin-bottom: 20px;">
+                    <button onclick="clearRecentHistory()" class="btn-small btn-remove">Clear History</button>
+                </div>
+                <div id="recentList" class="list-container">
+                    <div class="empty-state">
+                        <div class="empty-state-icon">🕒</div>
+                        <div class="empty-state-text">No recent conversions yet!</div>
+                        <div class="empty-state-subtext">Start converting to see your history here.</div>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <!-- Add to Favorites Button (for converter page) -->
-        <div id="favoriteButton" class="favorite-button" style="display: none;">
-            <button onclick="toggleFavorite()" id="favBtn" title="Add to favorites">⭐</button>
+            <!-- Popular Page -->
+            <div id="popularPage" class="page">
+                <h2>🔥 Popular Conversions</h2>
+                <div class="popular-categories">
+                    <h3>Most Used Categories</h3>
+                    <div id="popularCategories" class="list-container"></div>
+                    
+                    <h3 style="margin-top: 32px;">Most Used Conversions</h3>
+                    <div id="popularConversions" class="list-container"></div>
+                </div>
+            </div>
         </div>
     </div>
     
