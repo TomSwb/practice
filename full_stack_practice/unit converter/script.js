@@ -1979,3 +1979,129 @@ function testAddSampleData() {
 
 // Make the test function available globally
 window.testAddSampleData = testAddSampleData;
+
+// Load popular page
+function loadPopularPage() {
+    const popularCategories = document.getElementById('popularCategories');
+    const popularConversions = document.getElementById('popularConversions');
+    const popularControls = document.querySelector('.popular-controls');
+    
+    if (!popularCategories || !popularConversions) {
+        console.error('Popular page elements not found');
+        return;
+    }
+    
+    // Check if we have any popular data
+    const hasPopularCategories = Object.keys(userPreferences.popularCategories || {}).length > 0;
+    const hasPopularConversions = Object.keys(userPreferences.popularConversions || {}).length > 0;
+    const hasAnyPopularData = hasPopularCategories || hasPopularConversions;
+    
+    // Show/hide the clear button based on whether we have data
+    if (popularControls) {
+        popularControls.style.display = hasAnyPopularData ? 'block' : 'none';
+    }
+    
+    // Load popular categories
+    if (hasPopularCategories) {
+        popularCategories.innerHTML = '';
+        
+        // Sort categories by usage count
+        const sortedCategories = Object.entries(userPreferences.popularCategories)
+            .sort(([,a], [,b]) => b - a)
+            .slice(0, 10); // Show top 10
+        
+        sortedCategories.forEach(([category, count]) => {
+            if (unitSystem[category]) {
+                const categoryItem = document.createElement('div');
+                categoryItem.className = 'list-item';
+                categoryItem.innerHTML = `
+                    <div class="list-item-content">
+                        <div class="list-item-title">${getCategoryDisplayName(category)}</div>
+                        <div class="list-item-subtitle">Used ${count} time${count !== 1 ? 's' : ''}</div>
+                    </div>
+                    <div class="list-item-actions">
+                        <button onclick="usePopularCategory('${category}')" class="btn-small btn-use">Use</button>
+                    </div>
+                `;
+                popularCategories.appendChild(categoryItem);
+            }
+        });
+    } else {
+        // Show empty state for categories
+        popularCategories.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-state-icon">🔥</div>
+                <div class="empty-state-text">No popular categories yet!</div>
+                <div class="empty-state-subtext">Start converting units to see your most used categories here.</div>
+            </div>
+        `;
+    }
+    
+    // Load popular conversions
+    if (hasPopularConversions) {
+        popularConversions.innerHTML = '';
+        
+        // Sort conversions by usage count
+        const sortedConversions = Object.entries(userPreferences.popularConversions)
+            .sort(([,a], [,b]) => b - a)
+            .slice(0, 10); // Show top 10
+        
+        sortedConversions.forEach(([conversionKey, count]) => {
+            const [category, fromUnit, toUnit] = conversionKey.split(':');
+            
+            if (unitSystem[category] && unitSystem[category].units[fromUnit] && unitSystem[category].units[toUnit]) {
+                const conversionItem = document.createElement('div');
+                conversionItem.className = 'list-item';
+                
+                const fromUnitData = unitSystem[category].units[fromUnit];
+                const toUnitData = unitSystem[category].units[toUnit];
+                
+                conversionItem.innerHTML = `
+                    <div class="list-item-content">
+                        <div class="list-item-title">${fromUnitData.name} → ${toUnitData.name}</div>
+                        <div class="list-item-subtitle">${unitSystem[category].name} • Used ${count} time${count !== 1 ? 's' : ''}</div>
+                    </div>
+                    <div class="list-item-actions">
+                        <button onclick="usePopularConversion('${category}', '${fromUnit}', '${toUnit}')" class="btn-small btn-use">Use</button>
+                    </div>
+                `;
+                popularConversions.appendChild(conversionItem);
+            }
+        });
+    } else {
+        // Show empty state for conversions
+        popularConversions.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-state-icon">🔥</div>
+                <div class="empty-state-text">No popular conversions yet!</div>
+                <div class="empty-state-subtext">Start converting units to see your most used conversions here.</div>
+            </div>
+        `;
+    }
+}
+
+// Use a popular category
+function usePopularCategory(categoryKey) {
+    // Switch to converter page
+    showPage('converter');
+    
+    // Set up the category
+    document.getElementById('category').value = categoryKey;
+    updateUnitSelectors();
+}
+
+// Use a popular conversion
+function usePopularConversion(category, fromUnit, toUnit) {
+    // Switch to converter page
+    showPage('converter');
+    
+    // Set up the conversion
+    document.getElementById('category').value = category;
+    updateUnitSelectors();
+    
+    setTimeout(() => {
+        document.getElementById('fromUnit').value = fromUnit;
+        document.getElementById('toUnit').value = toUnit;
+        autoConvert();
+    }, 50);
+}
