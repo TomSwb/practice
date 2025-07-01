@@ -12,145 +12,47 @@
         <div class="converter-section">
             <div class="category-section">
                 <label for="category">Category:</label>
-                <select id="category" onchange="filterConversions()">
-                    <option value="all">All Categories</option>
-                    <option value="distance">📏 Distance/Length</option>
-                    <option value="weight">⚖️ Weight</option>
+                <select id="category" onchange="updateUnitSelectors()">
+                    <option value="distance">📏 Distance & Length</option>
+                    <option value="mass">⚖️ Mass & Weight</option>
+                    <option value="volume">🥤 Volume & Liquid</option>
                     <option value="temperature">🌡️ Temperature</option>
-                    <option value="volume">🥤 Volume</option>
-                    <option value="speed">🏃‍♂️ Speed</option>
-                    <option value="fuel">⛽ Fuel Efficiency</option>
-                    <option value="area">📐 Area</option>
-                    <option value="pressure">🔧 Pressure</option>
-                    <option value="power">⚡ Power</option>
-                    <option value="cooking">👨‍🍳 Cooking</option>
-                    <option value="energy">🔋 Energy</option>
-                    <option value="data">💾 Data Storage</option>
                     <option value="time">⏰ Time</option>
-                    <option value="angle">📐 Angle</option>
+                    <option value="area">📐 Area</option>
+                    <option value="speed">🏃‍♂️ Speed & Velocity</option>
+                    <option value="energy">🔋 Energy & Power</option>
+                    <option value="pressure">🔧 Pressure</option>
+                    <option value="data">💾 Digital Storage</option>
+                    <option value="angle">📐 Angle & Rotation</option>
                 </select>
             </div>
             
-            <div class="conversion-section">
-                <label for="unit">Conversion:</label>
-                <div class="conversion-selector">
-                    <select id="unit" onchange="autoConvert()">
-                        <!-- Distance/Length -->
-                        <option value="milesToKm" data-category="distance">Miles → Kilometers</option>
-                        <option value="kmToMiles" data-category="distance">Kilometers → Miles</option>
-                        <option value="feetToMeters" data-category="distance">Feet → Meters</option>
-                        <option value="metersToFeet" data-category="distance">Meters → Feet</option>
-                        <option value="inchesToCm" data-category="distance">Inches → Centimeters</option>
-                        <option value="cmToInches" data-category="distance">Centimeters → Inches</option>
-                        <option value="yardsToMeters" data-category="distance">Yards → Meters</option>
-                        <option value="metersToYards" data-category="distance">Meters → Yards</option>
-                        <option value="mmToInches" data-category="distance">Millimeters → Inches</option>
-                        <option value="inchesToMm" data-category="distance">Inches → Millimeters</option>
-                        <option value="nauticalMilesToMiles" data-category="distance">Nautical Miles → Miles</option>
-                        <option value="milesToNauticalMiles" data-category="distance">Miles → Nautical Miles</option>
-                        
-                        <!-- Weight -->
-                        <option value="lbToKg" data-category="weight">Pounds to Kilograms</option>
-                        <option value="kgToLb" data-category="weight">Kilograms to Pounds</option>
-                        <option value="ozToGrams" data-category="weight">Ounces to Grams</option>
-                        <option value="gramsToOz" data-category="weight">Grams to Ounces</option>
-                        <option value="stonesToLb" data-category="weight">Stones to Pounds</option>
-                        <option value="lbToStones" data-category="weight">Pounds to Stones</option>
-                        <option value="metricTonsToLb" data-category="weight">Metric Tons to Pounds</option>
-                        <option value="lbToMetricTons" data-category="weight">Pounds to Metric Tons</option>
-                        <option value="caratsToGrams" data-category="weight">Carats to Grams</option>
-                        <option value="gramsToCarats" data-category="weight">Grams to Carats</option>
-                        
-                        <!-- Temperature -->
-                        <option value="celsiusToFahrenheit" data-category="temperature">Celsius to Fahrenheit</option>
-                        <option value="fahrenheitToCelsius" data-category="temperature">Fahrenheit to Celsius</option>
-                        
-                        <!-- Volume -->
-                        <option value="gallonsToLiters" data-category="volume">Gallons (US) to Liters</option>
-                        <option value="litersToGallons" data-category="volume">Liters to Gallons (US)</option>
-                        <option value="flOzToMl" data-category="volume">Fluid Ounces to Milliliters</option>
-                        <option value="mlToFlOz" data-category="volume">Milliliters to Fluid Ounces</option>
-                        <option value="cupsToMl" data-category="volume">Cups to Milliliters</option>
-                        <option value="mlToCups" data-category="volume">Milliliters to Cups</option>
-                        <option value="pintsToLiters" data-category="volume">Pints to Liters</option>
-                        <option value="litersToPints" data-category="volume">Liters to Pints</option>
-                        <option value="quartsToLiters" data-category="volume">Quarts to Liters</option>
-                        <option value="litersToQuarts" data-category="volume">Liters to Quarts</option>
-                        <option value="litersToCubicFeet" data-category="volume">Liters to Cubic Feet</option>
-                        <option value="cubicFeetToLiters" data-category="volume">Cubic Feet to Liters</option>
-                        <option value="imperialGallonsToLiters" data-category="volume">Imperial Gallons to Liters</option>
-                        <option value="litersToImperialGallons" data-category="volume">Liters to Imperial Gallons</option>
-                        
-                        <!-- Speed -->
-                        <option value="mphToKmh" data-category="speed">Miles per Hour to Km/h</option>
-                        <option value="kmhToMph" data-category="speed">Km/h to Miles per Hour</option>
-                        
-                        <!-- Fuel Efficiency -->
-                        <option value="mpgToLper100km" data-category="fuel">MPG to Liters per 100km</option>
-                        <option value="lper100kmToMpg" data-category="fuel">Liters per 100km to MPG</option>
-                        
-                        <!-- Area -->
-                        <option value="sqFtToSqM" data-category="area">Square Feet to Square Meters</option>
-                        <option value="sqMToSqFt" data-category="area">Square Meters to Square Feet</option>
-                        <option value="acresToHectares" data-category="area">Acres to Hectares</option>
-                        <option value="hectaresToAcres" data-category="area">Hectares to Acres</option>
-                        
-                        <!-- Pressure -->
-                        <option value="psiToBar" data-category="pressure">PSI to Bar</option>
-                        <option value="barToPsi" data-category="pressure">Bar to PSI</option>
-                        <option value="psiToKpa" data-category="pressure">PSI to kPa</option>
-                        <option value="kpaToPsi" data-category="pressure">kPa to PSI</option>
-                        
-                        <!-- Power -->
-                        <option value="hpToKw" data-category="power">Horsepower to Kilowatts</option>
-                        <option value="kwToHp" data-category="power">Kilowatts to Horsepower</option>
-                        
-                        <!-- Cooking -->
-                        <option value="tbspToMl" data-category="cooking">Tablespoons to Milliliters</option>
-                        <option value="mlToTbsp" data-category="cooking">Milliliters to Tablespoons</option>
-                        <option value="tspToMl" data-category="cooking">Teaspoons to Milliliters</option>
-                        <option value="mlToTsp" data-category="cooking">Milliliters to Teaspoons</option>
-                        
-                        <!-- Energy -->
-                        <option value="caloriesToJoules" data-category="energy">Calories to Joules</option>
-                        <option value="joulesToCalories" data-category="energy">Joules to Calories</option>
-                        <option value="btuToKwh" data-category="energy">BTU to Kilowatt-hours</option>
-                        <option value="kwhToBtu" data-category="energy">Kilowatt-hours to BTU</option>
-                        <option value="caloriesToBtu" data-category="energy">Calories to BTU</option>
-                        <option value="btuToCalories" data-category="energy">BTU to Calories</option>
-                        
-                        <!-- Data Storage -->
-                        <option value="bytesToKb" data-category="data">Bytes to Kilobytes</option>
-                        <option value="kbToBytes" data-category="data">Kilobytes to Bytes</option>
-                        <option value="kbToMb" data-category="data">Kilobytes to Megabytes</option>
-                        <option value="mbToKb" data-category="data">Megabytes to Kilobytes</option>
-                        <option value="mbToGb" data-category="data">Megabytes to Gigabytes</option>
-                        <option value="gbToMb" data-category="data">Gigabytes to Megabytes</option>
-                        <option value="gbToTb" data-category="data">Gigabytes to Terabytes</option>
-                        <option value="tbToGb" data-category="data">Terabytes to Gigabytes</option>
-                        <option value="bitsToBytes" data-category="data">Bits to Bytes</option>
-                        <option value="bytesToBits" data-category="data">Bytes to Bits</option>
-                        
-                        <!-- Time -->
-                        <option value="hoursToMinutes" data-category="time">Hours to Minutes</option>
-                        <option value="minutesToHours" data-category="time">Minutes to Hours</option>
-                        <option value="minutesToSeconds" data-category="time">Minutes to Seconds</option>
-                        <option value="secondsToMinutes" data-category="time">Seconds to Minutes</option>
-                        <option value="daysToHours" data-category="time">Days to Hours</option>
-                        <option value="hoursToDays" data-category="time">Hours to Days</option>
-                        <option value="weeksToDays" data-category="time">Weeks to Days</option>
-                        <option value="daysToWeeks" data-category="time">Days to Weeks</option>
-                        <option value="yearsToDays" data-category="time">Years to Days</option>
-                        <option value="daysToYears" data-category="time">Days to Years</option>
-                        
-                        <!-- Angle -->
-                        <option value="degreesToRadians" data-category="angle">Degrees to Radians</option>
-                        <option value="radiansToDegrees" data-category="angle">Radians to Degrees</option>
-                        <option value="degreesToGradians" data-category="angle">Degrees to Gradians</option>
-                        <option value="gradiansToDegrees" data-category="angle">Gradians to Degrees</option>
+            <div class="subcategory-section" id="subcategorySection" style="display: none;">
+                <label for="subcategory">Subcategory:</label>
+                <select id="subcategory" onchange="updateUnitSelectors()">
+                    <!-- Populated dynamically -->
+                </select>
+            </div>
+            
+            <div class="unit-selector-section">
+                <div class="from-unit-section">
+                    <label for="fromUnit">From:</label>
+                    <select id="fromUnit" onchange="autoConvert()">
+                        <!-- Populated dynamically -->
                     </select>
-    
-    <button id="swapButton" onclick="swapConversion()" title="Swap conversion direction">⇄ Swap</button>
+                </div>
+                
+                <div class="swap-section">
+                    <button id="swapButton" onclick="swapUnits()" title="Swap conversion direction">⇄</button>
+                </div>
+                
+                <div class="to-unit-section">
+                    <label for="toUnit">To:</label>
+                    <select id="toUnit" onchange="autoConvert()">
+                        <!-- Populated dynamically -->
+                    </select>
+                </div>
+            </div>
 </div>
 
 <div class="input-section">

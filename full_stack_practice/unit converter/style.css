@@ -22,7 +22,7 @@ h1 {
     color: #333;
 }
 
-.category-section, .conversion-section, .input-section, .result-section {
+.category-section, .subcategory-section, .unit-selector-section, .input-section, .result-section {
     margin-bottom: 20px;
     padding: 15px;
     border: 1px solid #ddd;
@@ -30,10 +30,28 @@ h1 {
     background-color: #fafafa;
 }
 
-.conversion-selector {
+.unit-selector-section {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 15px;
+    align-items: end;
+}
+
+.from-unit-section, .to-unit-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.swap-section {
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: center;
+    padding-top: 25px; /* Align with select boxes */
+}
+
+.subcategory-section {
+    border-color: #007bff;
+    background-color: #f0f8ff;
 }
 
 #swapButton {
@@ -120,18 +138,59 @@ select:focus, input:focus {
 }
 
 /* Responsive design */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .container {
         margin: 10px;
         padding: 20px;
     }
     
-    .conversion-selector {
-        flex-direction: column;
-        align-items: stretch;
+    .unit-selector-section {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .swap-section {
+        padding-top: 0;
+        order: 3;
+    }
+    
+    .from-unit-section {
+        order: 1;
+    }
+    
+    .to-unit-section {
+        order: 2;
     }
     
     #swapButton {
-        margin-top: 10px;
+        width: 100%;
+        padding: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        margin: 5px;
+        padding: 15px;
+    }
+    
+    h1 {
+        font-size: 24px;
+        padding: 8px;
+    }
+    
+    .category-section, .subcategory-section, .unit-selector-section, .input-section, .result-section {
+        padding: 12px;
+        margin-bottom: 15px;
+    }
+    
+    select, input {
+        padding: 12px;
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+    
+    .result-display {
+        font-size: 20px;
+        padding: 12px;
     }
 }
