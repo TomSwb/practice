@@ -1571,6 +1571,7 @@ function confirmDeleteFavorite() {
 // Load recent page
 function loadRecentPage() {
     const recentList = document.getElementById('recentList');
+    const recentControls = document.querySelector('.recent-controls');
     
     if (!recentList) {
         console.error('recentList element not found');
@@ -1578,6 +1579,11 @@ function loadRecentPage() {
     }
     
     if (userPreferences.recent.length === 0) {
+        // Hide the clear history button when there's no history
+        if (recentControls) {
+            recentControls.style.display = 'none';
+        }
+        
         recentList.innerHTML = `
             <div class="empty-state">
                 <div class="empty-state-icon">🕒</div>
@@ -1586,6 +1592,11 @@ function loadRecentPage() {
             </div>
         `;
         return;
+    }
+    
+    // Show the clear history button when there is history
+    if (recentControls) {
+        recentControls.style.display = 'block';
     }
     
     recentList.innerHTML = '';
