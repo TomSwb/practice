@@ -17,7 +17,7 @@ const sectorMapping = {
 
 // Complexity level mapping
 const complexityMapping = {
-    basic: ["distance", "mass", "volume", "temperature", "time", "area", "speed", "energy"],
+    basic: ["distance", "mass", "volume", "temperature", "time", "area", "speed", "fuel", "energy"],
     professional: ["distance", "mass", "volume", "temperature", "time", "area", "speed", "fuel", "energy", "pressure", "data", "frequency", "force"],
     expert: ["distance", "mass", "volume", "temperature", "time", "area", "speed", "fuel", "energy", "pressure", "data", "angle", "frequency", "force", "electrical", "flowRate", "density", "torque"]
 };

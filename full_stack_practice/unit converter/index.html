@@ -2,11 +2,7 @@
 <html>
 
 <head>
-                    <select id="complexityLevel" onchange="updateComplexityLevel()">
-                        <option value="basic">📱 Basic (Everyday)</option>
-                        <option value="professional">💼 Professional</option>
-                        <option value="expert">🔬 Expert (All Units)</option>
-                    </select>meta charset="UTF-8">
+    <meta charset="UTF-8">
     <title>Universal Unit Converter - Professional Tool</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Comprehensive unit converter for professionals - convert distance, mass, volume, temperature, time, and much more with favorites, recent history, and sector-based navigation.">
@@ -30,21 +26,22 @@
         <!-- Main Converter Page -->
         <div id="converterPage" class="page active">
             <div class="converter-section">
-                <!-- Progressive Disclosure Toggle -->
-                <div class="complexity-toggle">
-                    <label>Mode:</label>
-                    <select id="complexityLevel" onchange="updateComplexityLevel()">
-                        <option value="basic">� Basic (Everyday)</option>
-                        <option value="professional">💼 Professional</option>
-                        <option value="expert">🔬 Expert (All Units)</option>
-                    </select>
-                </div>
-
+                
                 <!-- Search Section -->
                 <div class="search-section">
                     <label for="searchInput">Quick Search:</label>
                     <input type="text" id="searchInput" placeholder="Search units, categories, or sectors..." oninput="performSearch()">
                     <div id="searchResults" class="search-results" style="display: none;"></div>
+                </div>
+
+                <!-- Progressive Disclosure Toggle -->
+                <div class="complexity-toggle">
+                    <label>Mode:</label>
+                    <select id="complexityLevel" onchange="updateComplexityLevel()">
+                        <option value="basic">📱 Basic (Everyday)</option>
+                        <option value="professional">💼 Professional</option>
+                        <option value="expert">🔬 Expert (All Units)</option>
+                    </select>
                 </div>
 
                 <!-- Sector Filter -->
@@ -55,12 +52,12 @@
                         <option value="everyday">🏠 Everyday & General</option>
                         <option value="engineering">🔧 Engineering & Construction</option>
                         <option value="science">🔬 Science & Research</option>
-                        <option value="automotive">� Automotive & Transportation</option>
-                        <option value="culinary">�‍🍳 Culinary & Food Service</option>
-                        <option value="digital">� Digital & Technology</option>
+                        <option value="automotive">🚗 Automotive & Transportation</option>
+                        <option value="culinary">👨‍🍳 Culinary & Food Service</option>
+                        <option value="digital">💻 Digital & Technology</option>
                         <option value="health">🏥 Health & Fitness</option>
                         <option value="aviation">✈️ Aviation & Maritime</option>
-                        <option value="business">� Business & Finance</option>
+                        <option value="business">💰 Business & Finance</option>
                     </select>
                 </div>
 
