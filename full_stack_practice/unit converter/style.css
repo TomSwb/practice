@@ -138,8 +138,8 @@ body {
 /* Quick Search */
 .quick-search {
     padding: 24px 32px;
-    background: linear-gradient(145deg, #1e3c72, #2a5298);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: linear-gradient(145deg, #1e3c72);
+        /* Same dark blue gradient */  
     backdrop-filter: blur(10px);
     box-shadow: 
         0 2px 8px rgba(0, 0, 0, 0.1),
@@ -271,31 +271,33 @@ body {
 
 .filter-group select {
     padding: 14px 16px;
-    border: 2px solid #e2e8f0;
+    border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 12px;
     font-size: 15px;
-    background: rgba(255, 255, 255, 0.95);
-    color: #1e293b;
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     font-weight: 500;
     cursor: pointer;
+    backdrop-filter: blur(10px);
     box-shadow: 
-        0 2px 4px rgba(0, 0, 0, 0.02),
-        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        0 2px 4px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .filter-group select:focus {
     outline: none;
-    border-color: #6366f1;
+    border-color: rgba(255, 255, 255, 0.6);
     box-shadow: 
-        0 0 0 4px rgba(99, 102, 241, 0.1),
-        0 4px 12px rgba(99, 102, 241, 0.15);
-    background: rgba(255, 255, 255, 1);
+        0 0 0 4px rgba(255, 255, 255, 0.1),
+        0 4px 12px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.25);
 }
 
 .filter-group select:hover {
-    border-color: #cbd5e1;
-    background: rgba(255, 255, 255, 1);
+    border-color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.2);
 }
 
 /* Conversion Sections */
