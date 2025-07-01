@@ -138,8 +138,12 @@ body {
 /* Quick Search */
 .quick-search {
     padding: 24px 32px;
-    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-    border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+    background: linear-gradient(145deg, #1e3c72, #2a5298);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .search-box {
@@ -151,32 +155,32 @@ body {
 .search-box input {
     width: 100%;
     padding: 16px 50px 16px 20px;
-    border: 2px solid #e2e8f0;
+    border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 16px;
     font-size: 16px;
-    background: rgba(255, 255, 255, 0.9);
-    color: #1e293b;
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-sizing: border-box;
     backdrop-filter: blur(10px);
     box-shadow: 
-        0 4px 6px rgba(0, 0, 0, 0.03),
-        0 1px 3px rgba(0, 0, 0, 0.08),
-        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        0 4px 6px rgba(0, 0, 0, 0.1),
+        0 1px 3px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .search-box input:focus {
     outline: none;
-    border-color: #6366f1;
+    border-color: rgba(255, 255, 255, 0.6);
     box-shadow: 
-        0 0 0 4px rgba(99, 102, 241, 0.1),
-        0 8px 25px rgba(99, 102, 241, 0.15),
-        inset 0 1px 0 rgba(255, 255, 255, 0.9);
-    background: rgba(255, 255, 255, 1);
+        0 0 0 4px rgba(255, 255, 255, 0.1),
+        0 8px 25px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.25);
 }
 
 .search-box input::placeholder {
-    color: #94a3b8;
+    color: rgba(255, 255, 255, 0.7);
     font-weight: 400;
 }
 
@@ -185,19 +189,19 @@ body {
     right: 18px;
     top: 50%;
     transform: translateY(-50%);
-    color: #94a3b8;
+    color: rgba(255, 255, 255, 0.7);
     font-size: 18px;
     transition: color 0.3s ease;
 }
 
 .search-box input:focus + .search-icon {
-    color: #6366f1;
+    color: rgba(255, 255, 255, 0.9);
 }
 
 /* Page Content */
 .page-content {
     padding: 32px;
-    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    background: linear-gradient(145deg, #1e3c72, #2a5298);
     min-height: 500px;
 }
 
@@ -229,25 +233,25 @@ body {
     margin-bottom: 32px;
     padding: 24px;
     background: linear-gradient(135deg, 
-        rgba(139, 92, 246, 0.08) 0%, 
-        rgba(139, 92, 246, 0.04) 50%,
-        rgba(255, 255, 255, 0.8) 100%);
+        rgba(139, 92, 246, 0.15) 0%, 
+        rgba(139, 92, 246, 0.08) 50%,
+        rgba(255, 255, 255, 0.1) 100%);
     border-radius: 20px;
-    border: 1px solid rgba(139, 92, 246, 0.3);
-    backdrop-filter: blur(10px);
+    border: 1px solid rgba(139, 92, 246, 0.4);
+    backdrop-filter: blur(20px);
     box-shadow: 
-        0 8px 32px rgba(139, 92, 246, 0.08),
-        0 4px 16px rgba(139, 92, 246, 0.04),
-        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+        0 8px 32px rgba(139, 92, 246, 0.15),
+        0 4px 16px rgba(139, 92, 246, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .filters:hover {
     transform: translateY(-2px);
     box-shadow: 
-        0 12px 40px rgba(139, 92, 246, 0.12),
-        0 6px 20px rgba(139, 92, 246, 0.08),
-        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+        0 12px 40px rgba(139, 92, 246, 0.2),
+        0 6px 20px rgba(139, 92, 246, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 
 .filter-group {
@@ -258,11 +262,11 @@ body {
 .filter-group label {
     margin-bottom: 10px;
     font-weight: 700;
-    color: #334155;
+    color: rgba(255, 255, 255, 0.9);
     font-size: 14px;
     letter-spacing: -0.025em;
     text-transform: uppercase;
-    opacity: 0.8;
+    opacity: 0.9;
 }
 
 .filter-group select {
@@ -298,44 +302,44 @@ body {
 .converter-section {
     margin-bottom: 28px;
     padding: 24px;
-    border: 1px solid rgba(226, 232, 240, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 20px;
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 
-        0 4px 16px rgba(0, 0, 0, 0.03),
-        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        0 4px 16px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .converter-section:hover {
     transform: translateY(-2px);
     box-shadow: 
-        0 8px 32px rgba(0, 0, 0, 0.06),
-        0 4px 16px rgba(0, 0, 0, 0.04),
-        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        0 8px 32px rgba(0, 0, 0, 0.15),
+        0 4px 16px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .category-section {
-    border-color: rgba(34, 197, 94, 0.3);
+    border-color: rgba(34, 197, 94, 0.4);
     background: linear-gradient(135deg, 
-        rgba(34, 197, 94, 0.08) 0%, 
-        rgba(34, 197, 94, 0.04) 50%,
-        rgba(255, 255, 255, 0.8) 100%);
+        rgba(34, 197, 94, 0.15) 0%, 
+        rgba(34, 197, 94, 0.08) 50%,
+        rgba(255, 255, 255, 0.1) 100%);
     box-shadow: 
-        0 4px 16px rgba(34, 197, 94, 0.08),
-        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        0 4px 16px rgba(34, 197, 94, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .subcategory-section {
-    border-color: rgba(99, 102, 241, 0.3);
+    border-color: rgba(99, 102, 241, 0.4);
     background: linear-gradient(135deg, 
-        rgba(99, 102, 241, 0.08) 0%, 
-        rgba(99, 102, 241, 0.04) 50%,
-        rgba(255, 255, 255, 0.8) 100%);
+        rgba(99, 102, 241, 0.15) 0%, 
+        rgba(99, 102, 241, 0.08) 50%,
+        rgba(255, 255, 255, 0.1) 100%);
     box-shadow: 
-        0 4px 16px rgba(99, 102, 241, 0.08),
-        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        0 4px 16px rgba(99, 102, 241, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .unit-selector-section {
@@ -343,14 +347,14 @@ body {
     grid-template-columns: 1fr auto 1fr;
     gap: 24px;
     align-items: end;
-    border-color: rgba(245, 158, 11, 0.3);
+    border-color: rgba(245, 158, 11, 0.4);
     background: linear-gradient(135deg, 
-        rgba(245, 158, 11, 0.08) 0%, 
-        rgba(245, 158, 11, 0.04) 50%,
-        rgba(255, 255, 255, 0.8) 100%);
+        rgba(245, 158, 11, 0.15) 0%, 
+        rgba(245, 158, 11, 0.08) 50%,
+        rgba(255, 255, 255, 0.1) 100%);
     box-shadow: 
-        0 4px 16px rgba(245, 158, 11, 0.08),
-        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        0 4px 16px rgba(245, 158, 11, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .from-unit-section, .to-unit-section {
@@ -366,36 +370,36 @@ body {
 }
 
 .input-section {
-    border-color: rgba(6, 182, 212, 0.3);
+    border-color: rgba(6, 182, 212, 0.4);
     background: linear-gradient(135deg, 
-        rgba(6, 182, 212, 0.08) 0%, 
-        rgba(6, 182, 212, 0.04) 50%,
-        rgba(255, 255, 255, 0.8) 100%);
+        rgba(6, 182, 212, 0.15) 0%, 
+        rgba(6, 182, 212, 0.08) 50%,
+        rgba(255, 255, 255, 0.1) 100%);
     box-shadow: 
-        0 4px 16px rgba(6, 182, 212, 0.08),
-        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        0 4px 16px rgba(6, 182, 212, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .result-section {
-    border-color: rgba(34, 197, 94, 0.3);
+    border-color: rgba(34, 197, 94, 0.4);
     background: linear-gradient(135deg, 
-        rgba(34, 197, 94, 0.08) 0%, 
-        rgba(34, 197, 94, 0.04) 50%,
-        rgba(255, 255, 255, 0.8) 100%);
+        rgba(34, 197, 94, 0.15) 0%, 
+        rgba(34, 197, 94, 0.08) 50%,
+        rgba(255, 255, 255, 0.1) 100%);
     box-shadow: 
-        0 4px 16px rgba(34, 197, 94, 0.08),
-        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        0 4px 16px rgba(34, 197, 94, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .section-label {
     display: block;
     margin-bottom: 12px;
     font-weight: 700;
-    color: #334155;
+    color: rgba(255, 255, 255, 0.9);
     font-size: 14px;
     letter-spacing: -0.025em;
     text-transform: uppercase;
-    opacity: 0.8;
+    opacity: 0.9;
 }
 
 #swapButton {
@@ -447,39 +451,40 @@ body {
 select, input[type="number"] {
     width: 100%;
     padding: 16px 20px;
-    border: 2px solid #e2e8f0;
+    border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 12px;
     font-size: 16px;
-    background: rgba(255, 255, 255, 0.95);
-    color: #1e293b;
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-sizing: border-box;
     font-weight: 500;
+    backdrop-filter: blur(10px);
     box-shadow: 
-        0 2px 4px rgba(0, 0, 0, 0.02),
-        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        0 2px 4px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 select:focus, input[type="number"]:focus {
     outline: none;
-    border-color: #6366f1;
+    border-color: rgba(255, 255, 255, 0.6);
     box-shadow: 
-        0 0 0 4px rgba(99, 102, 241, 0.1),
-        0 4px 12px rgba(99, 102, 241, 0.15),
-        inset 0 1px 0 rgba(255, 255, 255, 0.9);
-    background: rgba(255, 255, 255, 1);
+        0 0 0 4px rgba(255, 255, 255, 0.1),
+        0 4px 12px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.25);
 }
 
 select:hover, input[type="number"]:hover {
-    border-color: #cbd5e1;
-    background: rgba(255, 255, 255, 1);
+    border-color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.2);
 }
 
 .unit-label {
     display: inline-block;
     margin-left: 16px;
     font-weight: 700;
-    color: #6366f1;
+    color: rgba(255, 255, 255, 0.9);
     min-width: 70px;
     font-size: 15px;
     letter-spacing: -0.025em;
