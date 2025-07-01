@@ -1057,7 +1057,7 @@ function initializeApp() {
     });
     
     // Show welcome hint
-    showHint("💡 Search for units, browse by sector, or use favorites. Press Ctrl+S to swap units.");
+    showHint("💡 Search for units, browse by sector, or use favorites.");
 }
 
 // Initialize when page loads
