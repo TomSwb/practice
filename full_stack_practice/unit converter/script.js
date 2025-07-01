@@ -1446,22 +1446,28 @@ function loadFavoritesPage() {
     const favoritesList = document.getElementById('favoritesList');
     
     if (userPreferences.favorites.length === 0) {
-        favoritesList.innerHTML = '<div class="empty-state"><p>No favorites yet! Use the ⭐ button on conversions to add them here.</p></div>';
+        favoritesList.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-state-icon">⭐</div>
+                <div class="empty-state-text">No favorites yet!</div>
+                <div class="empty-state-subtext">Use the ⭐ button on conversions to add them here.</div>
+            </div>
+        `;
         return;
     }
     
     favoritesList.innerHTML = '';
     userPreferences.favorites.forEach((favorite, index) => {
         const favoriteItem = document.createElement('div');
-        favoriteItem.className = 'favorite-item';
+        favoriteItem.className = 'list-item';
         favoriteItem.innerHTML = `
-            <div class="favorite-content">
-                <div class="favorite-name">${favorite.displayName}</div>
-                <div class="favorite-category">${favorite.categoryName}</div>
+            <div class="list-item-content">
+                <div class="list-item-title">${favorite.displayName}</div>
+                <div class="list-item-subtitle">${favorite.categoryName}</div>
             </div>
-            <div class="favorite-actions">
-                <button onclick="useFavorite(${index})" class="use-button">Use</button>
-                <button onclick="removeFavorite(${index})" class="remove-button">✕</button>
+            <div class="list-item-actions">
+                <button onclick="useFavorite(${index})" class="btn-small btn-use">Use</button>
+                <button onclick="removeFavorite(${index})" class="btn-small btn-remove">✕</button>
             </div>
         `;
         favoritesList.appendChild(favoriteItem);
@@ -1501,26 +1507,31 @@ function loadRecentPage() {
     const recentList = document.getElementById('recentList');
     
     if (userPreferences.recent.length === 0) {
-        recentList.innerHTML = '<div class="empty-state"><p>No recent conversions yet!</p></div>';
+        recentList.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-state-icon">🕒</div>
+                <div class="empty-state-text">No recent conversions yet!</div>
+                <div class="empty-state-subtext">Start converting units to see your recent history here.</div>
+            </div>
+        `;
         return;
     }
     
     recentList.innerHTML = '';
     userPreferences.recent.slice(0, 20).forEach((recent, index) => {
         const recentItem = document.createElement('div');
-        recentItem.className = 'recent-item';
+        recentItem.className = 'list-item';
         
         const date = new Date(recent.timestamp).toLocaleDateString();
         const time = new Date(recent.timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
         
         recentItem.innerHTML = `
-            <div class="recent-content">
-                <div class="recent-conversion">${recent.displayName}</div>
-                <div class="recent-category">${unitSystem[recent.category].name}</div>
-                <div class="recent-time">${date} ${time}</div>
+            <div class="list-item-content">
+                <div class="list-item-title">${recent.displayName}</div>
+                <div class="list-item-subtitle">${unitSystem[recent.category].name} • ${date} ${time}</div>
             </div>
-            <div class="recent-actions">
-                <button onclick="useRecent(${index})" class="use-button">Use</button>
+            <div class="list-item-actions">
+                <button onclick="useRecent(${index})" class="btn-small btn-use">Use</button>
             </div>
         `;
         recentList.appendChild(recentItem);
@@ -1567,15 +1578,23 @@ function loadPopularPage() {
         .slice(0, 5);
         
     if (sortedCategories.length === 0) {
-        popularCategories.innerHTML = '<p>No usage data yet!</p>';
+        popularCategories.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-state-icon">📊</div>
+                <div class="empty-state-text">No usage data yet!</div>
+                <div class="empty-state-subtext">Start using conversions to see popular categories here.</div>
+            </div>
+        `;
     } else {
         popularCategories.innerHTML = '';
         sortedCategories.forEach(([category, count]) => {
             const item = document.createElement('div');
-            item.className = 'popular-item';
+            item.className = 'list-item';
             item.innerHTML = `
-                <span class="popular-name">${getCategoryDisplayName(category)}</span>
-                <span class="popular-count">${count} uses</span>
+                <div class="list-item-content">
+                    <div class="list-item-title">${getCategoryDisplayName(category)}</div>
+                    <div class="list-item-subtitle">${count} uses</div>
+                </div>
             `;
             popularCategories.appendChild(item);
         });
@@ -1587,7 +1606,13 @@ function loadPopularPage() {
         .slice(0, 8);
         
     if (sortedConversions.length === 0) {
-        popularConversions.innerHTML = '<p>No conversion data yet!</p>';
+        popularConversions.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-state-icon">🔥</div>
+                <div class="empty-state-text">No conversion data yet!</div>
+                <div class="empty-state-subtext">Start converting units to see popular conversions here.</div>
+            </div>
+        `;
     } else {
         popularConversions.innerHTML = '';
         sortedConversions.forEach(([conversionKey, count]) => {
@@ -1596,15 +1621,23 @@ function loadPopularPage() {
             
             if (categoryData && categoryData.units[fromUnit] && categoryData.units[toUnit]) {
                 const item = document.createElement('div');
-                item.className = 'popular-item clickable';
+                item.className = 'list-item';
+                item.style.cursor = 'pointer';
                 item.innerHTML = `
-                    <span class="popular-name">
-                        ${categoryData.units[fromUnit].name} → ${categoryData.units[toUnit].name}
-                    </span>
-                    <span class="popular-count">${count} uses</span>
+                    <div class="list-item-content">
+                        <div class="list-item-title">
+                            ${categoryData.units[fromUnit].name} → ${categoryData.units[toUnit].name}
+                        </div>
+                        <div class="list-item-subtitle">${count} uses</div>
+                    </div>
+                    <div class="list-item-actions">
+                        <button class="btn-small btn-use">Use</button>
+                    </div>
                 `;
                 
-                item.onclick = () => {
+                const useButton = item.querySelector('.btn-small');
+                useButton.onclick = (e) => {
+                    e.stopPropagation();
                     // Switch to converter and set up this conversion
                     showPage('converter');
                     document.getElementById('category').value = category;
