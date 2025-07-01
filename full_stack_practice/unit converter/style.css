@@ -1,18 +1,137 @@
 body {
     background-color: blueviolet;
     padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
     padding: 10px;
-    background-color: white;
+    background-color: #f0f0f0;
     border-radius: 20px;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
 }
 
-p {
-    background-color: brown;
-    color: azure;
+.category-section, .conversion-section, .input-section, .result-section {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fafafa;
+}
+
+.conversion-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#swapButton {
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
     border-radius: 5px;
-    width: 200px;
-    height: 20px;
-    padding: 20px; }
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+#swapButton:hover {
+    background-color: #0056b3;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+select, input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+select:focus, input:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.unit-label {
+    display: inline-block;
+    margin-left: 10px;
+    font-weight: bold;
+    color: #007bff;
+    min-width: 50px;
+}
+
+.result-display {
+    font-size: 24px;
+    font-weight: bold;
+    color: #28a745;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border: 2px solid #28a745;
+    border-radius: 8px;
+    text-align: center;
+    min-height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.error-message {
+    color: #dc3545;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.hint-message {
+    color: #856404;
+    background-color: #fff3cd;
+    border: 1px solid #ffeaa7;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+.error-message:empty, .hint-message:empty {
+    display: none;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+    .container {
+        margin: 10px;
+        padding: 20px;
+    }
+    
+    .conversion-selector {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    #swapButton {
+        margin-top: 10px;
+    }
+}
