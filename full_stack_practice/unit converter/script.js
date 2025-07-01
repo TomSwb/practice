@@ -1009,7 +1009,11 @@ function swapUnits() {
     fromUnitSelect.value = toUnitSelect.value;
     toUnitSelect.value = temp;
     
-    autoConvert();
+    // Force update of unit labels and conversion with a small delay
+    setTimeout(() => {
+        updateUnitLabels();
+        autoConvert();
+    }, 10);
 }
 
 // Initialize the app
@@ -1633,13 +1637,13 @@ function clearRecentHistory() {
     if (recentList) {
         recentList.innerHTML = `
             <div class="empty-state">
-                <div class="empty-state-icon">✅</div>
+                <div class="success-state-icon">✅</div>
                 <div class="empty-state-text">History cleared successfully!</div>
                 <div class="empty-state-subtext">Start converting units to see your history here.</div>
             </div>
         `;
         
-        // After 2 seconds, show the normal empty state
+        // After 3 seconds, show the normal empty state
         setTimeout(() => {
             recentList.innerHTML = `
                 <div class="empty-state">
@@ -1648,7 +1652,7 @@ function clearRecentHistory() {
                     <div class="empty-state-subtext">Start converting units to see your recent history here.</div>
                 </div>
             `;
-        }, 2000);
+        }, 2500);
     }
     
     // Show success hint

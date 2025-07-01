@@ -548,9 +548,6 @@ select#category option:checked {
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(20px);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 
-        0 4px 16px rgba(0, 0, 0, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .converter-section:hover {
@@ -964,6 +961,13 @@ input[type="number"]:hover {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+}
+
+.success-state-icon {
+    font-size: 64px;
+    margin-bottom: 24px;
+    opacity: 0.9;
+    /* No gradient override - keeps natural emoji color */
 }
 
 .empty-state-text {
