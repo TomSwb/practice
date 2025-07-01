@@ -1058,10 +1058,18 @@ function initializeApp() {
     
     // Show welcome hint
     showHint("💡 Search for units, browse by sector, or use favorites.");
+    
+    // Add event listener for clear history button (with retry)
+    setTimeout(() => {
+        const clearHistoryBtn = document.getElementById('clearHistoryBtn');
+        if (clearHistoryBtn) {
+            console.log('✅ Found clearHistoryBtn, adding event listener');
+            clearHistoryBtn.addEventListener('click', clearRecentHistory);
+        } else {
+            console.error('❌ clearHistoryBtn not found');
+        }
+    }, 100);
 }
-
-// Initialize when page loads
-document.addEventListener('DOMContentLoaded', initializeApp);
 
 // ===== NEW ENHANCED FUNCTIONALITY =====
 
@@ -1081,9 +1089,19 @@ function loadUserPreferences() {
 // Save user preferences to localStorage
 function saveUserPreferences() {
     try {
-        localStorage.setItem('unitConverterPrefs', JSON.stringify(userPreferences));
+        const dataToSave = JSON.stringify(userPreferences);
+        localStorage.setItem('unitConverterPrefs', dataToSave);
+        
+        // Verify the save worked
+        const verification = localStorage.getItem('unitConverterPrefs');
+        if (verification !== dataToSave) {
+            console.error('Failed to save user preferences - verification failed');
+            return false;
+        }
+        return true;
     } catch (e) {
         console.warn('Could not save user preferences:', e);
+        return false;
     }
 }
 
@@ -1506,6 +1524,11 @@ function removeFavorite(index) {
 function loadRecentPage() {
     const recentList = document.getElementById('recentList');
     
+    if (!recentList) {
+        console.error('recentList element not found');
+        return;
+    }
+    
     if (userPreferences.recent.length === 0) {
         recentList.innerHTML = `
             <div class="empty-state">
@@ -1558,14 +1581,87 @@ function useRecent(index) {
     }, 50);
 }
 
-// Clear recent history
-function clearRecentHistory() {
-    if (confirm('Are you sure you want to clear your conversion history?')) {
-        userPreferences.recent = [];
-        saveUserPreferences();
-        loadRecentPage();
+// Show custom confirmation dialog
+function showClearConfirmation() {
+    const dialog = document.getElementById('clearConfirmationDialog');
+    if (dialog) {
+        dialog.style.display = 'flex';
+        // Add click outside to close
+        setTimeout(() => {
+            dialog.addEventListener('click', function(e) {
+                if (e.target === dialog) {
+                    hideClearConfirmation();
+                }
+            });
+        }, 100);
     }
 }
+
+// Hide custom confirmation dialog
+function hideClearConfirmation() {
+    const dialog = document.getElementById('clearConfirmationDialog');
+    if (dialog) {
+        dialog.style.display = 'none';
+    }
+}
+
+// Confirm and execute clear history
+function confirmClearHistory() {
+    hideClearConfirmation();
+    clearRecentHistory();
+}
+
+// Clear recent history (updated to remove confirm popup)
+function clearRecentHistory() {
+    console.log('=== CLEAR RECENT HISTORY CALLED ===');
+    console.log('Clear history called, current items:', userPreferences.recent.length);
+    
+    // Clear the array
+    userPreferences.recent = [];
+    
+    // Save to localStorage
+    const saveSuccess = saveUserPreferences();
+    
+    if (!saveSuccess) {
+        // Show error in a nicer way
+        showError('Warning: Could not save to browser storage. History may reappear after refresh.');
+        return;
+    }
+    
+    // Immediately update the UI
+    const recentList = document.getElementById('recentList');
+    if (recentList) {
+        recentList.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-state-icon">✅</div>
+                <div class="empty-state-text">History cleared successfully!</div>
+                <div class="empty-state-subtext">Start converting units to see your history here.</div>
+            </div>
+        `;
+        
+        // After 2 seconds, show the normal empty state
+        setTimeout(() => {
+            recentList.innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-state-icon">🕒</div>
+                    <div class="empty-state-text">No recent conversions yet!</div>
+                    <div class="empty-state-subtext">Start converting units to see your recent history here.</div>
+                </div>
+            `;
+        }, 2000);
+    }
+    
+    // Show success hint
+    showHint('✅ Conversion history cleared successfully!');
+    
+    console.log('History cleared successfully');
+}
+
+// Make clearRecentHistory available globally
+window.clearRecentHistory = clearRecentHistory;
+window.showClearConfirmation = showClearConfirmation;
+window.hideClearConfirmation = hideClearConfirmation;
+window.confirmClearHistory = confirmClearHistory;
 
 // Load popular page
 function loadPopularPage() {
@@ -1659,7 +1755,49 @@ function loadPopularPage() {
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', initializeApp);
 
+// Debug function to check user preferences (for testing)
+function debugUserPrefs() {
+    console.log('Current userPreferences:', userPreferences);
+    console.log('Recent history length:', userPreferences.recent.length);
+    console.log('Local storage item:', localStorage.getItem('unitConverterPrefs'));
+    return userPreferences;
+}
+
+// Make debugUserPrefs available globally for testing
+window.debugUserPrefs = debugUserPrefs;
+
 // Legacy compatibility
 function filterConversions() {
     updateUnitSelectors();
 }
+
+// Test function to manually add some recent history for testing
+function testAddRecentHistory() {
+    console.log('=== MANUAL TEST ===');
+    addToRecentHistory('meter', 'foot', 'distance', '10', '32.81');
+    addToRecentHistory('kilogram', 'pound', 'mass', '5', '11.02');
+    loadRecentPage();
+    console.log('Added test recent history items');
+}
+
+// Make test function available globally
+window.testAddRecentHistory = testAddRecentHistory;
+
+// Test function to manually clear recent history for testing
+function testClearRecentHistory() {
+    if (confirm('Are you sure you want to CLEAR all recent history?')) {
+        userPreferences.recent = [];
+        saveUserPreferences();
+        loadRecentPage();
+        alert('Recent history cleared!');
+    }
+}
+
+// Make test clear function available globally
+window.testClearRecentHistory = testClearRecentHistory;
+
+// Final check - script loaded successfully
+console.log('✅ Script loaded successfully');
+console.log('clearRecentHistory function available:', typeof clearRecentHistory);
+console.log('testClearRecentHistory function available:', typeof testClearRecentHistory);
+console.log('userPreferences initialized:', typeof userPreferences);

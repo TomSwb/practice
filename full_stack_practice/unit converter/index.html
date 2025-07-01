@@ -143,7 +143,22 @@
             <div id="recentPage" class="page">
                 <h2>🕒 Recent Conversions</h2>
                 <div class="recent-controls" style="margin-bottom: 20px;">
-                    <button onclick="clearRecentHistory()" class="btn-small btn-remove">Clear History</button>
+                    <button onclick="showClearConfirmation()" class="btn-small btn-remove">Clear History</button>
+                    <button onclick="window.testAddRecentHistory ? window.testAddRecentHistory() : alert('Function not found!')" class="btn-small" style="margin-left: 10px;">Add Test Data</button>
+                    <button onclick="alert('Simple test works!')" class="btn-small" style="margin-left: 10px;">Simple Test</button>
+                </div>
+                
+                <!-- Custom Confirmation Dialog -->
+                <div id="clearConfirmationDialog" class="confirmation-dialog" style="display: none;">
+                    <div class="confirmation-content">
+                        <div class="confirmation-icon">⚠️</div>
+                        <div class="confirmation-title">Clear Conversion History?</div>
+                        <div class="confirmation-message">This will permanently delete all your recent conversions. This action cannot be undone.</div>
+                        <div class="confirmation-buttons">
+                            <button onclick="confirmClearHistory()" class="btn-small btn-remove">Yes, Clear History</button>
+                            <button onclick="hideClearConfirmation()" class="btn-small btn-use" style="margin-left: 10px;">Cancel</button>
+                        </div>
+                    </div>
                 </div>
                 <div id="recentList" class="list-container">
                     <div class="empty-state">

@@ -1090,74 +1090,80 @@ input[type="number"]:hover {
     z-index: 1;
 }
 
-/* Page Headers */
-h2 {
-    font-size: 28px;
-    font-weight: 800;
-    color: rgba(255, 255, 255, 0.95);
-    margin: 0 0 32px 0;
-    padding: 20px 28px;
-    background: linear-gradient(135deg, 
-        rgba(99, 102, 241, 0.2) 0%, 
-        rgba(139, 92, 246, 0.15) 50%,
-        rgba(255, 255, 255, 0.1) 100%);
-    border: 1px solid rgba(99, 102, 241, 0.3);
-    border-radius: 20px;
-    backdrop-filter: blur(20px);
-    box-shadow: 
-        0 8px 32px rgba(99, 102, 241, 0.15),
-        0 4px 16px rgba(99, 102, 241, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    letter-spacing: -0.5px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-}
-
-h2::before {
-    content: '';
-    position: absolute;
+/* Custom Confirmation Dialog */
+.confirmation-dialog {
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(45deg, 
-        rgba(255, 255, 255, 0.1) 0%, 
-        transparent 50%, 
-        rgba(255, 255, 255, 0.05) 100%);
-    opacity: 0.7;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
 }
 
-h2::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 3px;
-    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-    border-radius: 2px;
-}
-
-h3 {
-    font-size: 20px;
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.9);
-    margin: 0 0 16px 0;
-    padding: 12px 20px;
+.confirmation-content {
     background: linear-gradient(135deg, 
-        rgba(99, 102, 241, 0.1) 0%, 
-        rgba(139, 92, 246, 0.08) 50%,
-        rgba(255, 255, 255, 0.05) 100%);
-    border: 1px solid rgba(99, 102, 241, 0.2);
-    border-radius: 12px;
-    backdrop-filter: blur(10px);
+        rgba(255, 255, 255, 0.95) 0%, 
+        rgba(248, 250, 252, 0.9) 100%);
+    padding: 32px;
+    border-radius: 20px;
     box-shadow: 
-        0 4px 16px rgba(99, 102, 241, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    letter-spacing: -0.025em;
-    text-align: left;
+        0 20px 60px rgba(0, 0, 0, 0.2),
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    max-width: 400px;
+    text-align: center;
+    backdrop-filter: blur(20px);
+    animation: confirmationSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Page Content */
+@keyframes confirmationSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.confirmation-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    display: block;
+}
+
+.confirmation-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 12px;
+    letter-spacing: -0.025em;
+}
+
+.confirmation-message {
+    font-size: 16px;
+    color: #64748b;
+    margin-bottom: 24px;
+    line-height: 1.5;
+    font-weight: 500;
+}
+
+.confirmation-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.confirmation-buttons .btn-small {
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    min-width: 120px;
+}
