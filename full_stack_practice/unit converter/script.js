@@ -274,6 +274,31 @@ const unitSystem = {
         }
     },
 
+    fuel: {
+        name: "Fuel Efficiency",
+        baseUnit: "literPer100km",
+        subcategories: {
+            all: "All Units"
+        },
+        units: {
+            literPer100km: { name: "Liters per 100km", symbol: "L/100km" },
+            milesPerGallon: { name: "Miles per Gallon (US)", symbol: "mpg" },
+            milesPerGallonImperial: { name: "Miles per Gallon (UK)", symbol: "mpg UK" },
+            kilometerPerLiter: { name: "Kilometers per Liter", symbol: "km/L" }
+        },
+        // Special conversion functions for fuel efficiency (inverse relationships)
+        convert: {
+            literPer100kmToMilesPerGallon: (l100) => 235.214 / l100,
+            milesPerGallonToLiterPer100km: (mpg) => 235.214 / mpg,
+            literPer100kmToMilesPerGallonImperial: (l100) => 282.481 / l100,
+            milesPerGallonImperialToLiterPer100km: (mpgUK) => 282.481 / mpgUK,
+            literPer100kmToKilometerPerLiter: (l100) => 100 / l100,
+            kilometerPerLiterToLiterPer100km: (kmL) => 100 / kmL,
+            milesPerGallonToKilometerPerLiter: (mpg) => mpg * 0.425144,
+            kilometerPerLiterToMilesPerGallon: (kmL) => kmL / 0.425144
+        }
+    },
+
     angle: {
         name: "Angle & Rotation",
         baseUnit: "radian",
@@ -448,6 +473,16 @@ function formatNumber(num, fromUnit, toUnit, category) {
             }
             break;
             
+        case 'fuel':
+            // Fuel efficiency: 1-2 decimals usually
+            if (toUnit === 'literPer100km') {
+                decimalPlaces = absNum >= 10 ? 1 : 2;
+            } else {
+                // MPG, km/L - typically 1 decimal
+                decimalPlaces = absNum >= 10 ? 1 : 2;
+            }
+            break;
+            
         default:
             // Fallback: general smart formatting
             if (absNum >= 1000) {
@@ -498,6 +533,11 @@ function convertUnits(value, fromUnit, toUnit, category) {
         return convertTemperature(value, fromUnit, toUnit);
     }
     
+    // Special case for fuel efficiency
+    if (category === 'fuel') {
+        return convertFuelEfficiency(value, fromUnit, toUnit);
+    }
+    
     // Standard conversion through base unit
     const fromUnitData = categoryData.units[fromUnit];
     const toUnitData = categoryData.units[toUnit];
@@ -538,6 +578,47 @@ function convertTemperature(value, fromUnit, toUnit) {
         case 'kelvin': return tempSystem.convert.celsiusToKelvin(celsius);
         case 'rankine': return tempSystem.convert.celsiusToRankine(celsius);
         default: return null;
+    }
+}
+
+// Special fuel efficiency conversion
+function convertFuelEfficiency(value, fromUnit, toUnit) {
+    if (value <= 0) return null; // Fuel efficiency must be positive
+    
+    if (fromUnit === toUnit) return value;
+    
+    // Convert everything to L/100km first, then to target
+    let literPer100km;
+    
+    switch (fromUnit) {
+        case 'literPer100km':
+            literPer100km = value;
+            break;
+        case 'milesPerGallon':
+            literPer100km = 235.214 / value;
+            break;
+        case 'milesPerGallonImperial':
+            literPer100km = 282.481 / value;
+            break;
+        case 'kilometerPerLiter':
+            literPer100km = 100 / value;
+            break;
+        default:
+            return null;
+    }
+    
+    // Convert from L/100km to target unit
+    switch (toUnit) {
+        case 'literPer100km':
+            return literPer100km;
+        case 'milesPerGallon':
+            return 235.214 / literPer100km;
+        case 'milesPerGallonImperial':
+            return 282.481 / literPer100km;
+        case 'kilometerPerLiter':
+            return 100 / literPer100km;
+        default:
+            return null;
     }
 }
 
