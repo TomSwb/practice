@@ -1079,32 +1079,66 @@ function initializeApp() {
 
 // Load user preferences from localStorage
 function loadUserPreferences() {
+    console.log('📂 Loading user preferences from localStorage...');
     const stored = localStorage.getItem('unitConverterPrefs');
+    console.log('🔍 Raw stored data:', stored);
+    
     if (stored) {
         try {
             const parsed = JSON.parse(stored);
+            console.log('✅ Successfully parsed stored data:', parsed);
             userPreferences = { ...userPreferences, ...parsed };
+            console.log('💾 Merged user preferences:', userPreferences);
         } catch (e) {
-            console.warn('Could not load user preferences:', e);
+            console.error('❌ Could not parse stored preferences:', e);
+            console.warn('🔄 Using default preferences instead');
         }
+    } else {
+        console.log('ℹ️ No stored preferences found, using defaults:', userPreferences);
+    }
+    
+    // Test localStorage functionality
+    try {
+        const testKey = 'unitConverter_test';
+        const testValue = 'test_' + Date.now();
+        localStorage.setItem(testKey, testValue);
+        const retrieved = localStorage.getItem(testKey);
+        localStorage.removeItem(testKey);
+        
+        if (retrieved === testValue) {
+            console.log('✅ localStorage is working correctly');
+        } else {
+            console.error('❌ localStorage test failed - got:', retrieved, 'expected:', testValue);
+        }
+    } catch (e) {
+        console.error('❌ localStorage is not available:', e);
     }
 }
 
 // Save user preferences to localStorage
 function saveUserPreferences() {
+    console.log('💾 Saving user preferences:', userPreferences);
     try {
         const dataToSave = JSON.stringify(userPreferences);
+        console.log('📤 Data to save (stringified):', dataToSave);
+        
         localStorage.setItem('unitConverterPrefs', dataToSave);
+        console.log('✅ Data saved to localStorage');
         
         // Verify the save worked
         const verification = localStorage.getItem('unitConverterPrefs');
+        console.log('🔍 Verification check - retrieved:', verification);
+        
         if (verification !== dataToSave) {
-            console.error('Failed to save user preferences - verification failed');
+            console.error('❌ Save verification failed!');
+            console.error('Expected:', dataToSave);
+            console.error('Got:', verification);
             return false;
         }
+        console.log('✅ Save verification successful');
         return true;
     } catch (e) {
-        console.warn('Could not save user preferences:', e);
+        console.error('❌ Could not save user preferences:', e);
         return false;
     }
 }
@@ -1860,7 +1894,7 @@ function clearAllPopular() {
             <div class="empty-state">
                 <div class="success-state-icon">✅</div>
                 <div class="empty-state-text">Popular data cleared!</div>
-                <div class="empty-state-subtext">Start using conversions to see popular categories here.</div>
+                <div class="empty-state-subtext">Start using conversions to see your most used categories here.</div>
             </div>
         `;
         
@@ -1868,7 +1902,7 @@ function clearAllPopular() {
             <div class="empty-state">
                 <div class="success-state-icon">✅</div>
                 <div class="empty-state-text">Popular data cleared!</div>
-                <div class="empty-state-subtext">Start converting units to see popular conversions here.</div>
+                <div class="empty-state-subtext">Start converting units to see your most used conversions here.</div>
             </div>
         `;
         
@@ -2104,4 +2138,19 @@ function usePopularConversion(category, fromUnit, toUnit) {
         document.getElementById('toUnit').value = toUnit;
         autoConvert();
     }, 50);
+}
+
+// Initialize the app when the DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🚀 DOM loaded, initializing app...');
+    initializeApp();
+});
+
+// Fallback initialization if DOMContentLoaded already fired
+if (document.readyState === 'loading') {
+    // DOM hasn't finished loading yet
+} else {
+    // DOM has already loaded
+    console.log('🚀 DOM already loaded, initializing app...');
+    initializeApp();
 }
