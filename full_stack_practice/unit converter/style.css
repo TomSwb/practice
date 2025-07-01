@@ -215,17 +215,11 @@ body {
     max-width: 100%;
 }
 
-/* Filter Groups Container - Responsive Layout */
+/* Filter Groups Container - Always Vertical Layout */
 .filter-groups {
     display: grid;
     grid-template-columns: 1fr;
     gap: 20px;
-}
-
-@media (min-width: 768px) {
-    .filter-groups {
-        grid-template-columns: 1fr 1fr;
-    }
 }
 
 .filter-search .search-box input {
