@@ -134,6 +134,20 @@
             <!-- Favorites Page -->
             <div id="favoritesPage" class="page">
                 <h2><span class="emoji">⭐</span> <span class="text">Favorite</span></h2>
+                
+                <!-- Delete Favorite Confirmation Dialog -->
+                <div id="deleteFavoriteDialog" class="confirmation-dialog" style="display: none;">
+                    <div class="confirmation-content">
+                        <div class="confirmation-icon">⚠️</div>
+                        <div class="confirmation-title">Remove from Favorites?</div>
+                        <div class="confirmation-message" id="deleteFavoriteMessage">Are you sure you want to remove this conversion from your favorites?</div>
+                        <div class="confirmation-buttons">
+                            <button onclick="confirmDeleteFavorite()" class="btn-small btn-remove">Yes, Remove</button>
+                            <button onclick="hideDeleteFavoriteDialog()" class="btn-small btn-use" style="margin-left: 10px;">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+                
                 <div id="favoritesList" class="list-container">
                     <div class="empty-state">
                         <div class="empty-state-icon">⭐</div>

@@ -1516,12 +1516,56 @@ function useFavorite(index) {
 }
 
 // Remove favorite
+// Remove favorite (now shows confirmation dialog)
+let favoriteToDelete = -1; // Store index of favorite to delete
+
 function removeFavorite(index) {
-    if (index >= 0 && index < userPreferences.favorites.length) {
-        userPreferences.favorites.splice(index, 1);
+    favoriteToDelete = index;
+    showDeleteFavoriteDialog(index);
+}
+
+// Show delete favorite confirmation dialog
+function showDeleteFavoriteDialog(index) {
+    const dialog = document.getElementById('deleteFavoriteDialog');
+    const message = document.getElementById('deleteFavoriteMessage');
+    
+    if (dialog && message && index >= 0 && index < userPreferences.favorites.length) {
+        const favorite = userPreferences.favorites[index];
+        message.textContent = `Are you sure you want to remove "${favorite.displayName}" from your favorites?`;
+        
+        dialog.style.display = 'flex';
+        // Add click outside to close
+        setTimeout(() => {
+            dialog.addEventListener('click', function(e) {
+                if (e.target === dialog) {
+                    hideDeleteFavoriteDialog();
+                }
+            });
+        }, 100);
+    }
+}
+
+// Hide delete favorite dialog
+function hideDeleteFavoriteDialog() {
+    const dialog = document.getElementById('deleteFavoriteDialog');
+    if (dialog) {
+        dialog.style.display = 'none';
+    }
+    // DON'T reset favoriteToDelete here - it's needed for confirmation
+}
+
+// Confirm and execute favorite deletion
+function confirmDeleteFavorite() {
+    hideDeleteFavoriteDialog();
+    
+    if (favoriteToDelete >= 0 && favoriteToDelete < userPreferences.favorites.length) {
+        userPreferences.favorites.splice(favoriteToDelete, 1);
         saveUserPreferences();
         loadFavoritesPage();
     }
+    
+    // Reset AFTER the deletion is complete
+    favoriteToDelete = -1;
 }
 
 // Load recent page
@@ -1663,6 +1707,11 @@ window.clearRecentHistory = clearRecentHistory;
 window.showClearConfirmation = showClearConfirmation;
 window.hideClearConfirmation = hideClearConfirmation;
 window.confirmClearHistory = confirmClearHistory;
+
+// Make favorite deletion functions available globally
+window.showDeleteFavoriteDialog = showDeleteFavoriteDialog;
+window.hideDeleteFavoriteDialog = hideDeleteFavoriteDialog;
+window.confirmDeleteFavorite = confirmDeleteFavorite;
 
 // Load popular page
 function loadPopularPage() {
