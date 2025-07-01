@@ -42,29 +42,32 @@
                         <div id="searchResults" class="search-results" style="display: none;"></div>
                     </div>
                     
-                    <div class="filter-group">
-                        <label>Mode:</label>
-                        <select id="complexityLevel" onchange="updateComplexityLevel()">
-                            <option value="basic">📱 Basic (Everyday)</option>
-                            <option value="professional">💼 Professional</option>
-                            <option value="expert">🔬 Expert (All Units)</option>
-                        </select>
-                    </div>
-                    
-                    <div class="filter-group">
-                        <label for="sector">Sector:</label>
-                        <select id="sector" onchange="updateCategoriesBySector()">
-                            <option value="all">🌐 All Sectors</option>
-                            <option value="everyday">🏠 Everyday & General</option>
-                            <option value="engineering">🔧 Engineering & Construction</option>
-                            <option value="science">🔬 Science & Research</option>
-                            <option value="automotive">🚗 Automotive & Transportation</option>
-                            <option value="culinary">👨‍🍳 Culinary & Food Service</option>
-                            <option value="digital">💻 Digital & Technology</option>
-                            <option value="health">🏥 Health & Fitness</option>
-                            <option value="aviation">✈️ Aviation & Maritime</option>
-                            <option value="business">💰 Business & Finance</option>
-                        </select>
+                    <!-- Filter Groups Container -->
+                    <div class="filter-groups">
+                        <div class="filter-group">
+                            <label>Mode:</label>
+                            <select id="complexityLevel" onchange="updateComplexityLevel()">
+                                <option value="basic">📱 Basic (Everyday)</option>
+                                <option value="professional">💼 Professional</option>
+                                <option value="expert">🔬 Expert (All Units)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="sector">Sector:</label>
+                            <select id="sector" onchange="updateCategoriesBySector()">
+                                <option value="all">🌐 All Sectors</option>
+                                <option value="everyday">🏠 Everyday & General</option>
+                                <option value="engineering">🔧 Engineering & Construction</option>
+                                <option value="science">🔬 Science & Research</option>
+                                <option value="automotive">🚗 Automotive & Transportation</option>
+                                <option value="culinary">👨‍🍳 Culinary & Food Service</option>
+                                <option value="digital">💻 Digital & Technology</option>
+                                <option value="health">🏥 Health & Fitness</option>
+                                <option value="aviation">✈️ Aviation & Maritime</option>
+                                <option value="business">💰 Business & Finance</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
 

@@ -175,8 +175,8 @@ body {
 
 /* Convert Page Filters */
 .filters {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 24px;
     margin-bottom: 32px;
     padding: 24px;
@@ -204,13 +204,25 @@ body {
 
 /* Filter Search Section */
 .filter-search {
-    grid-column: 1 / -1;
     margin-bottom: 8px;
 }
 
 .filter-search .search-box {
     position: relative;
     max-width: 100%;
+}
+
+/* Filter Groups Container - Responsive Layout */
+.filter-groups {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+@media (min-width: 768px) {
+    .filter-groups {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
 .filter-search .search-box input {
@@ -257,30 +269,6 @@ body {
 
 .filter-search .search-box input:focus + .search-icon {
     color: rgba(255, 255, 255, 0.9);
-}
-
-/* Filter Groups Container */
-.filters > .filter-group:first-of-type {
-    grid-column: 1;
-}
-
-.filters > .filter-group:nth-of-type(2) {
-    grid-column: 1;
-}
-
-/* Responsive filter groups */
-@media (min-width: 768px) {
-    .filters {
-        grid-template-columns: 1fr 1fr;
-    }
-    
-    .filters > .filter-group:first-of-type {
-        grid-column: 1;
-    }
-    
-    .filters > .filter-group:nth-of-type(2) {
-        grid-column: 2;
-    }
 }
 
 .filter-group {
