@@ -151,6 +151,9 @@ body {
     padding: 32px;
     background: linear-gradient(145deg, #1e3c72, #2a5298);
     min-height: 500px;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .page {
@@ -812,6 +815,7 @@ input[type="number"]:hover {
 .list-container {
     max-height: 450px;
     overflow-y: auto;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
     border: 1px solid rgba(226, 232, 240, 0.8);
     border-radius: 16px;
     background: rgba(255, 255, 255, 0.9);
@@ -821,6 +825,8 @@ input[type="number"]:hover {
         inset 0 1px 0 rgba(255, 255, 255, 0.9);
     scrollbar-width: thin;
     scrollbar-color: rgba(99, 102, 241, 0.3) transparent;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .list-container::-webkit-scrollbar {
@@ -849,6 +855,9 @@ input[type="number"]:hover {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
     position: relative;
+    width: 100%;
+    min-width: 0; /* Allow flex items to shrink below their content size */
+    box-sizing: border-box;
 }
 
 .list-item::before {
@@ -879,6 +888,8 @@ input[type="number"]:hover {
 
 .list-item-content {
     flex: 1;
+    min-width: 0; /* Allow content to shrink */
+    margin-right: 16px; /* Space for actions */
 }
 
 .list-item-title {
@@ -887,6 +898,10 @@ input[type="number"]:hover {
     margin-bottom: 6px;
     font-size: 16px;
     letter-spacing: -0.025em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
 }
 
 .list-item-subtitle {
@@ -894,6 +909,10 @@ input[type="number"]:hover {
     color: #64748b;
     font-weight: 500;
     opacity: 0.8;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
 }
 
 .list-item-actions {
@@ -901,6 +920,8 @@ input[type="number"]:hover {
     gap: 10px;
     opacity: 0;
     transition: opacity 0.3s ease;
+    flex-shrink: 0; /* Prevent actions from shrinking */
+    margin-left: auto; /* Push to the right */
 }
 
 .list-item:hover .list-item-actions {

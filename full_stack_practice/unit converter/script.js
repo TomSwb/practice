@@ -1557,33 +1557,30 @@ function loadRecentPage() {
                 <div class="list-item-title">${recent.displayName}</div>
                 <div class="list-item-subtitle">${unitSystem[recent.category].name} • ${date} ${time}</div>
             </div>
-            <div class="list-item-actions">
-                <button onclick="useRecent(${index})" class="btn-small btn-use">Use</button>
-            </div>
         `;
         recentList.appendChild(recentItem);
     });
 }
 
-// Use a recent conversion
-function useRecent(index) {
-    const recent = userPreferences.recent[index];
-    if (!recent) return;
-    
-    // Switch to converter page
-    showPage('converter');
-    
-    // Set up the conversion
-    document.getElementById('category').value = recent.category;
-    updateUnitSelectors();
-    
-    setTimeout(() => {
-        document.getElementById('fromUnit').value = recent.fromUnit;
-        document.getElementById('toUnit').value = recent.toUnit;
-        document.getElementById('userInput').value = recent.inputValue;
-        autoConvert();
-    }, 50);
-}
+// Use a recent conversion (REMOVED - Recent entries are now view-only)
+// function useRecent(index) {
+//     const recent = userPreferences.recent[index];
+//     if (!recent) return;
+//     
+//     // Switch to converter page
+//     showPage('converter');
+//     
+//     // Set up the conversion
+//     document.getElementById('category').value = recent.category;
+//     updateUnitSelectors();
+//     
+//     setTimeout(() => {
+//         document.getElementById('fromUnit').value = recent.fromUnit;
+//         document.getElementById('toUnit').value = recent.toUnit;
+//         document.getElementById('userInput').value = recent.inputValue;
+//         autoConvert();
+//     }, 50);
+// }
 
 // Show custom confirmation dialog
 function showClearConfirmation() {
@@ -1695,7 +1692,18 @@ function loadPopularPage() {
                     <div class="list-item-title">${getCategoryDisplayName(category)}</div>
                     <div class="list-item-subtitle">${count} uses</div>
                 </div>
+                <div class="list-item-actions">
+                    <button class="btn-small btn-use">Use</button>
+                </div>
             `;
+            
+            // Add click handler for the Use button
+            const useButton = item.querySelector('.btn-small');
+            useButton.onclick = (e) => {
+                e.stopPropagation();
+                usePopularCategory(category);
+            };
+            
             popularCategories.appendChild(item);
         });
     }
@@ -1805,3 +1813,35 @@ console.log('✅ Script loaded successfully');
 console.log('clearRecentHistory function available:', typeof clearRecentHistory);
 console.log('testClearRecentHistory function available:', typeof testClearRecentHistory);
 console.log('userPreferences initialized:', typeof userPreferences);
+
+// Use a popular category (separate from specific conversions)
+function usePopularCategory(category) {
+    // Switch to converter page
+    showPage('converter');
+    
+    // First, update the sector/complexity to ensure the category is available
+    const availableCategories = sectorMapping[userPreferences.lastSector || 'all'] || [];
+    const complexityCategories = complexityMapping[userPreferences.lastComplexity || 'basic'] || [];
+    const filteredCategories = availableCategories.filter(cat => complexityCategories.includes(cat));
+    
+    // If category is not available in current sector/complexity, switch to 'all'
+    if (!filteredCategories.includes(category)) {
+        document.getElementById('sector').value = 'all';
+        updateCategoriesBySector();
+    }
+    
+    // Set up the category
+    setTimeout(() => {
+        const categorySelect = document.getElementById('category');
+        if (categorySelect) {
+            categorySelect.value = category;
+            updateUnitSelectors();
+            
+            // Clear any existing input
+            setTimeout(() => {
+                document.getElementById('userInput').value = '';
+                autoConvert();
+            }, 50);
+        }
+    }, 50);
+}
