@@ -1161,9 +1161,77 @@ input[type="number"]:hover {
     justify-content: center;
 }
 
-.confirmation-buttons .btn-small {
-    padding: 12px 24px;
-    font-size: 14px;
+/* Header Styles for Section Pages */
+h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0 0 24px 0;
+    text-align: center;
+    letter-spacing: -0.025em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+h2 .emoji {
+    font-size: 28px;
+    filter: none;
+    -webkit-text-fill-color: initial;
+    color: initial;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+h2 .text {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+h3 {
+    font-size: 20px;
     font-weight: 600;
-    min-width: 120px;
+    color: #e2e8f0;
+    margin: 24px 0 16px 0;
+    letter-spacing: -0.015em;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Special styling for subsection headers with extra spacing */
+h3.popular-subsection {
+    margin-top: 32px;
+}
+
+/* Override specific dialog title styling to prevent conflicts */
+.confirmation-content h2.confirmation-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 12px;
+    letter-spacing: -0.025em;
+    text-shadow: none;
+    background: none;
+    -webkit-background-clip: initial;
+    -webkit-text-fill-color: #1e293b;
+    background-clip: initial;
 }

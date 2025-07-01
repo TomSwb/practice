@@ -129,7 +129,7 @@
 
             <!-- Favorites Page -->
             <div id="favoritesPage" class="page">
-                <h2>⭐ Favorite Conversions</h2>
+                <h2><span class="emoji">⭐</span> <span class="text">Favorite Conversions</span></h2>
                 <div id="favoritesList" class="list-container">
                     <div class="empty-state">
                         <div class="empty-state-icon">⭐</div>
@@ -141,11 +141,11 @@
 
             <!-- Recent Page -->
             <div id="recentPage" class="page">
-                <h2>🕒 Recent Conversions</h2>
+                <h2><span class="emoji">🕒</span> <span class="text">Recent Conversions</span></h2>
                 <div class="recent-controls" style="margin-bottom: 20px;">
                     <button onclick="showClearConfirmation()" class="btn-small btn-remove">Clear History</button>
-                    <button onclick="window.testAddRecentHistory ? window.testAddRecentHistory() : alert('Function not found!')" class="btn-small" style="margin-left: 10px;">Add Test Data</button>
-                    <button onclick="alert('Simple test works!')" class="btn-small" style="margin-left: 10px;">Simple Test</button>
+                    <!-- <button onclick="window.testAddRecentHistory ? window.testAddRecentHistory() : alert('Function not found!')" class="btn-small" style="margin-left: 10px;">Add Test Data</button>
+                    <button onclick="alert('Simple test works!')" class="btn-small" style="margin-left: 10px;">Simple Test</button> -->
                 </div>
                 
                 <!-- Custom Confirmation Dialog -->
@@ -171,12 +171,12 @@
 
             <!-- Popular Page -->
             <div id="popularPage" class="page">
-                <h2>🔥 Popular Conversions</h2>
+                <h2><span class="emoji">🔥</span> <span class="text">Popular Conversions</span></h2>
                 <div class="popular-categories">
                     <h3>Most Used Categories</h3>
                     <div id="popularCategories" class="list-container"></div>
                     
-                    <h3 style="margin-top: 32px;">Most Used Conversions</h3>
+                    <h3 class="popular-subsection">Most Used Conversions</h3>
                     <div id="popularConversions" class="list-container"></div>
                 </div>
             </div>
