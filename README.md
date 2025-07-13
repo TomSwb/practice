@@ -41,7 +41,8 @@ Most exercises were done during my courses on [mimo.org](https://mimo.org/web/li
       Personal link aggregation page project.
     - `coffe_shop_menu/`  
       Coffee shop menu web interface.
-
+    - `cv/`  
+      Example CV webpage style.
 ---
 
 ## Usage
