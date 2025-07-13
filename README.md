@@ -2,7 +2,9 @@
 
 This repository contains a collection of my programming practice projects, exercises, and experiments.  
 It is intended as a workspace for learning, testing new ideas, and improving coding skills.
-Most exercises were done during my courses on [mimo.org](https://mimo.org/web/library).
+Most exercises were done during my courses on [mimo.org](https://mimo.org/web/library) and this code is mostly coming from them, I do not have any claim on it's originality.
+
+- If Mimo was to ask me to take the exercises down, I will do so immediately.
 
 ---
 
