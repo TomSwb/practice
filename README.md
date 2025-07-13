@@ -43,6 +43,9 @@ Most exercises were done during my courses on [mimo.org](https://mimo.org/web/li
       Coffee shop menu web interface.
     - `cv/`  
       Example CV webpage style.
+    - `portfolio/`  
+      Example portfolio webpage.
+
 ---
 
 ## Usage
