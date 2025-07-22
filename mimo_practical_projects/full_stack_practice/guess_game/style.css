@@ -1,0 +1,38 @@
+.container {
+    text-align: center;
+    background-color: aquamarine;
+    padding-top: 2px;
+    padding-bottom: 15px;
+    margin: 20vh auto;
+    max-width: 30vw;
+    border-radius: 15px;
+
+}
+
+h1 {
+    font-size: 48px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: darkorchid;
+}
+
+p {
+    font-size: 16px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: darkorchid;
+}
+
+input {
+    margin: 5px;
+    padding: 2px;
+    border-radius: 5px;
+}
+
+button {
+    margin-top: 15px;
+    height: 60px;
+    width: 60px;
+    border-radius: 30px;
+    font-weight: bold;
+    border-color: silver;
+    background-color: gold;
+}
