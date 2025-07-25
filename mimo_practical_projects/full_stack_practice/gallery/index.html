@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Gallery</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Gallery</h1>
+    <div class="gallery">
+        <div class="item">
+            <img class="thumbnail" src="https://mimo.app/i/whispurr.png" alt="cat laying on chair"
+                onclick="showModal(this)">
+            <h2>Whispurr</h2>
+            <p>Comfort Cat</p>
+            <img class="thumbnail" src="https://mimo.app/i/babaganoosh.png" alt="cat laying on bed"
+                onclick="showModal(this)">
+            <h2>Babaganoosh</h2>
+            <p>Curious Cat</p>
+            <img class="thumbnail" src="https://mimo.app/i/nacho.png" alt="cat laying under cover"
+                onclick="showModal(this)">
+            <h2>Nacho</h2>
+            <p>Hidding Cat</p>
+        </div>
+    </div>
+    <div id="modal">
+        <button id="modal-close-button" onclick="hideModal()">x</button>
+        <img id="modal-content" src="" alt="">
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
